@@ -15,6 +15,7 @@ int trigPin = 12;
 int normalSpeed = 75;
 int maxSpeed = 255;
 
+//test comment
 void setup() {
   Serial.begin(9600);
   Serial.println("Hello I am alive");
