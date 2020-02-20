@@ -1,4 +1,4 @@
-// motor
+// motor pins
 #define EnA 9
 #define EnB 10
 #define In1 4
@@ -8,7 +8,7 @@
 #define EncA 2
 #define EncB 3
 
-//ultrasonic sensor
+//ultrasonic sensor pins
 int echoPin = 11;
 int distance = 0;
 int trigPin = 12;
@@ -17,6 +17,7 @@ int maxSpeed = 255;
 
 //test comment
 void setup() {
+  //Set up serial monitor
   Serial.begin(9600);
   Serial.println("Hello I am alive");
   
@@ -69,6 +70,7 @@ void initMotors(){
   digitalWrite(In3, HIGH);
   digitalWrite(In4, LOW);
 }
+
 void moveForward(){
   //turn on both motors
   analogWrite(EnA, normalSpeed);
