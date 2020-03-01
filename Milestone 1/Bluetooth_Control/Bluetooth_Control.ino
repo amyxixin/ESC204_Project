@@ -66,6 +66,12 @@ void loop() {
     } else if (val == 'd'){
       setPosX();
       moveX();
+    } else if (val == 'c'){
+      setCW();
+      turn();
+    } else if (val == 'v') {
+      setCCW();
+      turn();
     } else if (val == 'k'){
       stopMotors();
     }
@@ -90,6 +96,28 @@ void setSpeedX(int power){
     digitalWrite(EnC, LOW);
     digitalWrite(EnD, LOW);
   }
+}
+
+void setCW() {
+  digitalWrite(InA1, LOW);
+  digitalWrite(InA2, HIGH);
+  digitalWrite(InA3, HIGH);
+  digitalWrite(InA4, LOW);
+  digitalWrite(InB1, LOW);
+  digitalWrite(InB2, HIGH);
+  digitalWrite(InB3, LOW);
+  digitalWrite(InB4, HIGH);
+}
+
+void setCCW() {
+  digitalWrite(InA1, HIGH);
+  digitalWrite(InA2, LOW);
+  digitalWrite(InA3, LOW);
+  digitalWrite(InA4, HIGH);
+  digitalWrite(InB1, HIGH);
+  digitalWrite(InB2, LOW);
+  digitalWrite(InB3, HIGH);
+  digitalWrite(InB4, LOW);
 }
 
 void setPosY(){
@@ -148,6 +176,13 @@ void moveX(){
   //turn on both motors
   analogWrite(EnA, 0);
   analogWrite(EnB, 0);
+  analogWrite(EnC, normalSpeed);
+  analogWrite(EnD, normalSpeed);
+}
+
+void turn() {
+  analogWrite(EnA, normalSpeed);
+  analogWrite(EnB, normalSpeed);
   analogWrite(EnC, normalSpeed);
   analogWrite(EnD, normalSpeed);
 }
