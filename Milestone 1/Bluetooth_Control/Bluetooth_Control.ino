@@ -66,14 +66,15 @@ void loop() {
     } else if (val == 'd'){
       setPosX();
       moveX();
-    } else if (val == 'c'){
+    } else if (val == 'm'){
       setCW();
       turn();
-    } else if (val == 'v') {
+    } else if (val == 'n') {
       setCCW();
       turn();
     } else if (val == 'k'){
       stopMotors();
+      stopSpeed();
     }
   }
 }
@@ -103,6 +104,7 @@ void setCW() {
   digitalWrite(InA2, HIGH);
   digitalWrite(InA3, HIGH);
   digitalWrite(InA4, LOW);
+//  delay(800);
   digitalWrite(InB1, LOW);
   digitalWrite(InB2, HIGH);
   digitalWrite(InB3, LOW);
@@ -114,6 +116,7 @@ void setCCW() {
   digitalWrite(InA2, LOW);
   digitalWrite(InA3, LOW);
   digitalWrite(InA4, HIGH);
+//  delay(800);
   digitalWrite(InB1, HIGH);
   digitalWrite(InB2, LOW);
   digitalWrite(InB3, HIGH);
@@ -124,6 +127,7 @@ void setPosY(){
   //towards charging port
   digitalWrite(InA1, LOW);
   digitalWrite(InA2, HIGH);
+  
   digitalWrite(InA3, LOW);
   digitalWrite(InA4, HIGH);
 }
@@ -157,7 +161,6 @@ void stopMotors(){
   digitalWrite(InA2, LOW);
   digitalWrite(InA3, LOW);
   digitalWrite(InA4, LOW);
-  
   digitalWrite(InB1, LOW);
   digitalWrite(InB2, LOW);
   digitalWrite(InB3, LOW);
@@ -185,4 +188,11 @@ void turn() {
   analogWrite(EnB, normalSpeed);
   analogWrite(EnC, normalSpeed);
   analogWrite(EnD, normalSpeed);
+}
+
+void stopSpeed() {
+  analogWrite(EnA, 0);
+  analogWrite(EnB, 0);
+  analogWrite(EnC, 0);
+  analogWrite(EnD, 0);
 }
