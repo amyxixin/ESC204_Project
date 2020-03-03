@@ -58,6 +58,13 @@ class ChargEController {
 		//rotate
 		void rotate();
 
+		//set lead screw direction
+		void setPositiveZ();
+		void setNegativeZ();
+
+		//move lead screw
+		void moveZ();
+
 	public:
 
 		//set speed and input modes
@@ -75,6 +82,11 @@ class ChargEController {
 
 		//stop
 		void stop();
-};
 
+		//move lead screw in direction
+		void moveUp();
+		void moveDown();
+
+		void stopZ();
+}
 #endif

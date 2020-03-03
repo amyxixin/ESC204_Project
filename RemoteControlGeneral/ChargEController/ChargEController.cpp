@@ -100,6 +100,18 @@ void ChargEController::rotate() {
 	analogWrite(EnD, _turnspeed);
 }
 
+void ChargEController::setPositiveZ() {
+
+}
+
+void ChargEController::setNegativeZ() {
+
+}
+
+void ChargEController::moveZ() {
+
+}
+
 void ChargEController::moveForward() {
 	this->setPositiveY();
 	this->moveY();
@@ -140,4 +152,16 @@ void ChargEController::stop() {
 	digitalWrite(InB2, LOW);
  	digitalWrite(InB3, LOW);
 	digitalWrite(InB4, LOW);
+}
+
+void ChargEController::moveUp() {
+
+}
+
+void ChargEController::moveDown() {
+
+}
+
+void ChargEController::stopZ() {
+	
 }
