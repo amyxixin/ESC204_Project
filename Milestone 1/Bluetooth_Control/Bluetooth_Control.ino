@@ -26,8 +26,15 @@
 #define EncB1 21  //bottom motor
 #define EncB2 43
 
+
+//leadscrew connections
+int stepPin = 53;
+int dirPin = 52;
+
 char val = 0;
 int normalSpeed = 255;
+int dirScrew = -1;
+int posScrew = 0;
 
 void setup() {
   Serial.begin(9600);
@@ -48,6 +55,9 @@ void setup() {
   pinMode(InB2, OUTPUT);
   pinMode(InB3, OUTPUT);
   pinMode(InB4, OUTPUT);
+
+  pinMode(stepPin, OUTPUT);
+  pinMode(dirPin, OUTPUT);
 }
 
 void loop() {
@@ -69,12 +79,19 @@ void loop() {
     } else if (val == 'm'){
       setCW();
       turn();
+    } else if (val == 'b') {
+      dirScrew = 1;
+      digitalWrite(dirPin, HIGH);
+      raiseLeadScrew(5);
     } else if (val == 'n') {
-      setCCW();
-      turn();
+      dirScrew = -1;
+      digitalWrite(dirPin, LOW);
+      raiseLeadScrew(5);
     } else if (val == 'k'){
       stopMotors();
       stopSpeed();
+    } else if (val == 'x') {
+      resetScrew();
     }
   }
 }
@@ -195,4 +212,43 @@ void stopSpeed() {
   analogWrite(EnB, 0);
   analogWrite(EnC, 0);
   analogWrite(EnD, 0);
+}
+
+void raiseLeadScrew(int d) {
+  //pause time
+  const int p = 1000;
+
+  int numTurns = floor(d * (200/8));
+  for(int x = 0; x < numTurns; x++){
+    digitalWrite(stepPin, HIGH);
+    delayMicroseconds(p);
+    digitalWrite(stepPin, LOW);
+    delayMicroseconds(p);
+    posScrew = posScrew + dirScrew;
+  }
+   
+//   while(1){
+//    digitalWrite(stepPin, HIGH);
+//    delayMicroseconds(p);
+//    digitalWrite(stepPin, LOW);
+//    delayMicroseconds(p);
+//    posScrew = posScrew + dirScrew;
+//    if(posScrew == 0) {
+//      break;
+//    } else if (posScrew == 400) {
+//      break;
+//    }
+//   }
+}
+
+void resetScrew() {
+  digitalWrite(dirPin, LOW);
+  const int p = 1000;
+  
+  for(int x = 0; x < posScrew; x++){
+    digitalWrite(stepPin, HIGH);
+    delayMicroseconds(p);
+    digitalWrite(stepPin, LOW);
+    delayMicroseconds(p);
+  }
 }

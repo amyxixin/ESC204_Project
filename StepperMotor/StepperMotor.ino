@@ -1,5 +1,5 @@
-int stepPin = 3;
-int dirPin = 2;
+int stepPin = 53;
+int dirPin = 52;
 
 void setup() {
   // put your setup code here, to run once:
@@ -34,6 +34,7 @@ void loop() {
 }
 
 void raiseLeadScrew(int d) {
+  //pause time
   const int p = 1000;
 
   int numTurns = floor(d * (200/8));
