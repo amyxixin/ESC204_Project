@@ -145,30 +145,30 @@ void setPosY(){
   digitalWrite(InA1, LOW);
   digitalWrite(InA2, HIGH);
   
-  digitalWrite(InA3, LOW);
-  digitalWrite(InA4, HIGH);
+  digitalWrite(InA3, HIGH);
+  digitalWrite(InA4, LOW);
 }
 
 void setNegY(){
   //away from charging port
   digitalWrite(InA1, HIGH);
   digitalWrite(InA2, LOW);
-  digitalWrite(InA3, HIGH);
-  digitalWrite(InA4, LOW);
+  digitalWrite(InA3, LOW);
+  digitalWrite(InA4, HIGH);
 }
 
 void setPosX(){
   //right
-  digitalWrite(InB1, LOW);
-  digitalWrite(InB2, HIGH);
+  digitalWrite(InB1, HIGH);
+  digitalWrite(InB2, LOW);
   digitalWrite(InB3, HIGH);
   digitalWrite(InB4, LOW);
 }
 
 void setNegX(){
   //left
-  digitalWrite(InB1, HIGH);
-  digitalWrite(InB2, LOW);
+  digitalWrite(InB1, LOW);
+  digitalWrite(InB2, HIGH);
   digitalWrite(InB3, LOW);
   digitalWrite(InB4, HIGH);
 }
