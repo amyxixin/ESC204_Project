@@ -33,6 +33,7 @@ int dirPin = 52;
 
 char val = 0;
 int normalSpeed = 255;
+int turnSpeed = 180;
 int dirScrew = -1;
 int posScrew = 0;
 
@@ -79,11 +80,14 @@ void loop() {
     } else if (val == 'm'){
       setCW();
       turn();
-    } else if (val == 'b') {
+    } else if (val == 'n') {
+      setCCW();
+      turn();
+    } else if (val == 'v') {
       dirScrew = 1;
       digitalWrite(dirPin, HIGH);
       raiseLeadScrew(5);
-    } else if (val == 'n') {
+    } else if (val == 'b') {
       dirScrew = -1;
       digitalWrite(dirPin, LOW);
       raiseLeadScrew(5);
@@ -92,6 +96,8 @@ void loop() {
       stopSpeed();
     } else if (val == 'x') {
       resetScrew();
+    } else if (val == 'p') {
+      Serial.println(posScrew);
     }
   }
 }
@@ -201,10 +207,10 @@ void moveX(){
 }
 
 void turn() {
-  analogWrite(EnA, normalSpeed);
-  analogWrite(EnB, normalSpeed);
-  analogWrite(EnC, normalSpeed);
-  analogWrite(EnD, normalSpeed);
+  analogWrite(EnA, turnSpeed);
+  analogWrite(EnB, turnSpeed);
+  analogWrite(EnC, turnSpeed);
+  analogWrite(EnD, turnSpeed);
 }
 
 void stopSpeed() {
@@ -224,7 +230,8 @@ void raiseLeadScrew(int d) {
     delayMicroseconds(p);
     digitalWrite(stepPin, LOW);
     delayMicroseconds(p);
-    posScrew = posScrew + dirScrew;
+    posScrew = posScrew - dirScrew;
+//    Serial.println(posScrew);
   }
    
 //   while(1){
@@ -241,14 +248,16 @@ void raiseLeadScrew(int d) {
 //   }
 }
 
-void resetScrew() {
-  digitalWrite(dirPin, LOW);
+void resetScrew(){
+  digitalWrite(dirPin, HIGH);
   const int p = 1000;
   
-  for(int x = 0; x < posScrew; x++){
+  for(int x = 0; x < abs(posScrew); x++){
     digitalWrite(stepPin, HIGH);
     delayMicroseconds(p);
     digitalWrite(stepPin, LOW);
     delayMicroseconds(p);
   }
+
+  posScrew = 0;
 }
