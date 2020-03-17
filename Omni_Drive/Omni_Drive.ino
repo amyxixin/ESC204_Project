@@ -106,25 +106,30 @@ void setup() {
 }
 
 void loop() {
-//  if (Serial.available() > 0) {  
-//    integerValue = 0;        
-//    while(1) {           
-//      incomingByte = Serial.read();
-//      if (incomingByte == '\n') break;   
-//      if (incomingByte == -1) continue;  
-//      integerValue *= 10;  
-//      integerValue = ((incomingByte - 48) + integerValue);
-//      pos_pid_top.setpoint(integerValue);
-//      pos_pid_bottom.setpoint(integerValue);
-//    }
-//  }
+  //  This allows user to enter n number of encoder counts they want the robot to drive til
+  //  We were going to convert this to distance in mm but didn't have the time
+  
+  // this is an example for top and bottom motors which control left and right movement
+  // the same can be done for right and left motors
+  
+  if (Serial.available() > 0) {  
+    integerValue = 0;        
+    while(1) {           
+      incomingByte = Serial.read();
+      if (incomingByte == '\n') break;   
+      if (incomingByte == -1) continue;  
+      integerValue *= 10;  
+      integerValue = ((incomingByte - 48) + integerValue);
+      pos_pid_top.setpoint(integerValue);
+      pos_pid_bottom.setpoint(integerValue);
+    }
+  }
 
-  pos_pid_top.setpoint(distance);
-  pos_pid_bottom.setpoint(distance);
+  pos_pid_top.setpoint(integerValue);
+  pos_pid_bottom.setpoint(integerValue);
   setPidsX();
   
-  delay(1000);
-  distance += 100;
+  delay(10);
 }
 
 void setPidsY() {
@@ -255,20 +260,4 @@ void stopMotors(){
   digitalWrite(InB2, LOW);
   digitalWrite(InB3, LOW);
   digitalWrite(InB4, LOW);
-}
-
-void moveY(){
-  //turn on both motors
-  analogWrite(EnA, normalSpeed);
-  analogWrite(EnB, normalSpeed);
-  analogWrite(EnC, 0);
-  analogWrite(EnD, 0);
-}
-
-void moveX(){
-  //turn on both motors
-  analogWrite(EnA, 0);
-  analogWrite(EnB, 0);
-  analogWrite(EnC, normalSpeed);
-  analogWrite(EnD, normalSpeed);
 }

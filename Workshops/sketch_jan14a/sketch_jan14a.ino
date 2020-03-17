@@ -37,24 +37,25 @@ void setup() {
 }
 
 void loop() {
-  Serial.println("A: "+String(digitalRead(EncA)) + "B: "+String(digitalRead(EncB)));
-  //Serial.println());
-  //Serial.println("A-B: "+String(analogRead(EnA)-analogRead(EnB)));
-//  //sensor input
-//  digitalWrite(trigPin, LOW);
-//  delayMicroseconds(2);
-//  digitalWrite(trigPin, HIGH);
-//  delayMicroseconds(10);
-//  digitalWrite(trigPin, LOW);
-//  
-//  long pingTime = pulseIn (echoPin, HIGH);
-//  distance = pingTime * 0.034/2;
-//  Serial.println(distance);
-//  if (distance <= 15){
-//    turn(true);
-//  }else{
-//    moveForward();
-//  }
+//  Serial.println("A: "+String(digitalRead(EncA)) + "B: "+String(digitalRead(EncB)));
+//  Serial.println());
+//  Serial.println("A-B: "+String(analogRead(EnA)-analogRead(EnB)));
+
+  //sensor input
+  digitalWrite(trigPin, LOW);
+  delayMicroseconds(2);
+  digitalWrite(trigPin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigPin, LOW);
+  
+  long pingTime = pulseIn (echoPin, HIGH);
+  distance = pingTime * 0.034/2;
+  Serial.println(distance);
+  if (distance <= 15){
+    turn(true);
+  }else{
+    moveForward();
+  }
 }
 
 void halt() {
